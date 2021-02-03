@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0ev" modeler:exportDateTime="20170517182253" modeler:modelId="1001178" modeler:modelVersion="1" modeler:modelLastUpdated="1495041766799" modeler:originalModelId="1001064" modeler:originalModelVersion="1">
+  <process id="InvoiceProcess" name="Invoice Process" isExecutable="true">
+    <documentation>Invoice Process</documentation>
+    <startEvent id="startEvent1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[startEvent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <userTask id="sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593" name="Branch/Department Admin Reviews Invoice" activiti:assignee="${approvers.get(0)}" activiti:dueDate="${taskDueDateExpression}" activiti:priority="${taskPriority}">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-6E649234-F7C5-4420-8654-21C714916CD7" sourceRef="startEvent1" targetRef="sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-6E649234-F7C5-4420-8654-21C714916CD7]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <userTask id="sid-133304EE-411F-44D7-88AF-FC54F0FB3D36" name="Branch/Department Approver approves Invoice" activiti:assignee="${approvers.get(1)}" activiti:dueDate="${taskDueDateExpression}" activiti:priority="${taskPriority}">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-133304EE-411F-44D7-88AF-FC54F0FB3D36]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-11B5E914-C355-4234-AC9A-1FB8B9D48EE7" sourceRef="sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593" targetRef="sid-133304EE-411F-44D7-88AF-FC54F0FB3D36">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-11B5E914-C355-4234-AC9A-1FB8B9D48EE7]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <userTask id="sid-2B481FD6-72FC-4E4C-B203-261B655A61CF" name="AP Approver Finalizes and approves Invoice" activiti:assignee="${approvers.get(2)}" activiti:dueDate="${taskDueDateExpression}" activiti:priority="${taskPriority}">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-2B481FD6-72FC-4E4C-B203-261B655A61CF]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-006EEE64-FC23-401F-919C-896C05CEFB22" sourceRef="sid-133304EE-411F-44D7-88AF-FC54F0FB3D36" targetRef="sid-2B481FD6-72FC-4E4C-B203-261B655A61CF">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-006EEE64-FC23-401F-919C-896C05CEFB22]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <endEvent id="sid-FDBAACF5-E008-409A-91A5-F5D28F424C4B">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-FDBAACF5-E008-409A-91A5-F5D28F424C4B]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="sid-823C6480-9F1C-447C-86C0-1641A7912869" sourceRef="sid-2B481FD6-72FC-4E4C-B203-261B655A61CF" targetRef="sid-FDBAACF5-E008-409A-91A5-F5D28F424C4B">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-823C6480-9F1C-447C-86C0-1641A7912869]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_InvoiceProcess">
+    <bpmndi:BPMNPlane bpmnElement="InvoiceProcess" id="BPMNPlane_InvoiceProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="190.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593" id="BPMNShape_sid-4BAB123F-60BD-4B28-91F4-6E72B54B3593">
+        <omgdc:Bounds height="134.0" width="142.0" x="202.0" y="138.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-133304EE-411F-44D7-88AF-FC54F0FB3D36" id="BPMNShape_sid-133304EE-411F-44D7-88AF-FC54F0FB3D36">
+        <omgdc:Bounds height="133.0" width="141.0" x="420.0" y="135.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-2B481FD6-72FC-4E4C-B203-261B655A61CF" id="BPMNShape_sid-2B481FD6-72FC-4E4C-B203-261B655A61CF">
+        <omgdc:Bounds height="133.0" width="126.0" x="630.0" y="135.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-FDBAACF5-E008-409A-91A5-F5D28F424C4B" id="BPMNShape_sid-FDBAACF5-E008-409A-91A5-F5D28F424C4B">
+        <omgdc:Bounds height="28.0" width="28.0" x="870.0" y="191.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-823C6480-9F1C-447C-86C0-1641A7912869" id="BPMNEdge_sid-823C6480-9F1C-447C-86C0-1641A7912869">
+        <omgdi:waypoint x="756.0" y="201.5"/>
+        <omgdi:waypoint x="813.0" y="201.5"/>
+        <omgdi:waypoint x="813.0" y="205.0"/>
+        <omgdi:waypoint x="870.0" y="205.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6E649234-F7C5-4420-8654-21C714916CD7" id="BPMNEdge_sid-6E649234-F7C5-4420-8654-21C714916CD7">
+        <omgdi:waypoint x="130.0" y="205.0"/>
+        <omgdi:waypoint x="202.0" y="205.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-006EEE64-FC23-401F-919C-896C05CEFB22" id="BPMNEdge_sid-006EEE64-FC23-401F-919C-896C05CEFB22">
+        <omgdi:waypoint x="561.0" y="201.5"/>
+        <omgdi:waypoint x="630.0" y="201.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-11B5E914-C355-4234-AC9A-1FB8B9D48EE7" id="BPMNEdge_sid-11B5E914-C355-4234-AC9A-1FB8B9D48EE7">
+        <omgdi:waypoint x="344.0" y="205.0"/>
+        <omgdi:waypoint x="382.0" y="205.0"/>
+        <omgdi:waypoint x="382.0" y="201.5"/>
+        <omgdi:waypoint x="420.0" y="201.5"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,50 @@
+Use Activiti designer to modify the workflow and validate it. Make sure you copy an existing Alfresco workflow to use correct variables, etc.
+I copied the prc workflow into the Activiti app designer. 
+http://localhost:8080/activiti-app/editor/#/editor/5007
+
+Made updates to the workflow.
+	Changed group names
+	Changed flow
+	Kept email and publish
+	validated successfully.
+
+go to workflow designer tool to upload valid and completed workflow and deploy for use in Alfresco CM:
+
+http://armcldc7aapp7.armedianet.com:8080/alfresco/activiti-admin
+	
+Need to update instructions - did that in the xml:
+Need to change workflow task description in the sequence flow:
+
+	    <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+			<activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Engineering Review');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+		
+Need to get workflow id
+Change workflow id from prc??
+
+Use activiti-admin to deploy and update workflow.
+
+Use admin workflow console to find workflow id?
+show definitions all
+id: activiti$activitiAdhoc:1:4 , name: activiti$activitiAdhoc , title: New Task , version: 1
+id: activiti$activitiInvitationModerated:1:23 , name: activiti$activitiInvitationModerated , title: Invitation - Moderated , version: 1
+id: activiti$activitiInvitationNominated:1:26 , name: activiti$activitiInvitationNominated , title: Site Invitation - Nominated , version: 1
+id: activiti$activitiInvitationNominatedAddDirect:1:29 , name: activiti$activitiInvitationNominatedAddDirect , title: Add user activiti invitation process , version: 1
+id: activiti$activitiParallelGroupReview:1:20 , name: activiti$activitiParallelGroupReview , title: Review and Approve (group review) , version: 1
+id: activiti$activitiParallelReview:1:16 , name: activiti$activitiParallelReview , title: Review and Approve (one or more reviewers) , version: 1
+id: activiti$activitiRequestForInformation:1:104 , name: activiti$activitiRequestForInformation , title: Request For Information Activiti Workflow , version: 1
+id: activiti$activitiReview:1:8 , name: activiti$activitiReview , title: Review And Approve (single reviewer) , version: 1
+id: activiti$activitiReviewPooled:1:12 , name: activiti$activitiReviewPooled , title: Review and Approve (pooled review) , version: 1
+id: activiti$Process_prc:1:1361 , name: activiti$Process_prc , title: Cambridge Electrical Permit Approval Process , version: 1
+id: activiti$publishWebContent:1:35 , name: activiti$publishWebContent , title: Publish Web Content Activiti Process , version: 1
+id: activiti$quickStartReviewPublish:1:38 , name: activiti$quickStartReviewPublish , title: Web Quick Start: Review & Publish Web Assets , version: 1
+id: activiti$quickStartReviewPublishTree:1:41 , name: activiti$quickStartReviewPublishTree , title: Web Quick Start: Review & Publish Section Structure , version: 1
+id: activiti$readContactProcess:1:44 , name: activiti$readContactProcess , title: Web Quick Start: Handle Contact Request , version: 1
+id: activiti$resetPassword:1:32 , name: activiti$resetPassword , title: On Premise Reset Password process , version: 1
+
+		
+	
+	
+

@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20171009111055598" modeler:modelId="6006" modeler:modelVersion="1" modeler:modelLastUpdated="1507561839264">
+  <collaboration id="Collaboration">
+    <participant id="prc" name="Cambridge Electrical Permit Approval Process" processRef="Process_prc"/>
+  </collaboration>
+  <process id="Process_prc" name="Cambridge Electrical Permit Approval Process" isExecutable="true">
+    <laneSet id="laneSet_Process_prc">
+      <lane id="osa" name="Application Review">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[osa]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>intakereview</flowNodeRef>
+        <flowNodeRef>alfrescoStartevent1</flowNodeRef>
+        <flowNodeRef>exclusivegateway1</flowNodeRef>
+        <flowNodeRef>endevent1</flowNodeRef>
+        <flowNodeRef>emailrejection</flowNodeRef>
+        <flowNodeRef>flow1</flowNodeRef>
+        <flowNodeRef>flow27</flowNodeRef>
+        <flowNodeRef>flowintakerejected</flowNodeRef>
+        <flowNodeRef>flowintakeapproved</flowNodeRef>
+        <flowNodeRef>flow2</flowNodeRef>
+      </lane>
+      <lane id="ogcoac" name="Engineering Review">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[ogcoac]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>engineeringreview</flowNodeRef>
+        <flowNodeRef>exclusivegateway2</flowNodeRef>
+        <flowNodeRef>flow11</flowNodeRef>
+        <flowNodeRef>flowengineeringrejected</flowNodeRef>
+        <flowNodeRef>flowengineeringapproved</flowNodeRef>
+      </lane>
+      <lane id="row" name="Manager Approval">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[row]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>managersreview</flowNodeRef>
+        <flowNodeRef>inclusivegateway1</flowNodeRef>
+        <flowNodeRef>intakepublish</flowNodeRef>
+        <flowNodeRef>sid-6608E76C-1C40-463A-A72E-F4B554028635</flowNodeRef>
+        <flowNodeRef>sid-22FFABF3-640E-4D1D-966E-72E808E84CC7</flowNodeRef>
+        <flowNodeRef>flow13</flowNodeRef>
+        <flowNodeRef>flowmanagersrejected</flowNodeRef>
+        <flowNodeRef>flowmanagersapproved</flowNodeRef>
+        <flowNodeRef>sid-163F5D7E-AA7F-4E12-AAA1-312C08E6D623</flowNodeRef>
+        <flowNodeRef>sid-5D145E20-C2B9-4191-8004-671111720377</flowNodeRef>
+      </lane>
+    </laneSet>
+    <userTask id="intakereview" name="Intake Review" activiti:candidateGroups="GROUP_CBG_ELECTRICAL_PERMIT" activiti:formKey="wf:activitiReviewTask">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[if (typeof bpm_workflowDueDate != 'undefined') task.dueDate = bpm_workflowDueDate
+                        if (typeof bpm_workflowPriority != 'undefined') task.priority = bpm_workflowPriority;]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('wf_reviewOutcome', task.getVariable('wf_reviewOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[intakereview]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <startEvent id="alfrescoStartevent1" name="Alfresco start" activiti:formKey="wf:submitGroupReviewTask">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[alfrescoStartevent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[exclusivegateway1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </exclusiveGateway>
+    <endEvent id="endevent1" name="End">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[endevent1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <serviceTask id="emailrejection" name="Email Rejection" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
+      <extensionElements>
+        <activiti:field name="script">
+          <activiti:string><![CDATA[var mail = actions.create("mail");mail.parameters.to = "yasser.muwakki@armedia.com";mail.parameters.subject = "Electrical Permit Application Rejected";mail.parameters.from = "admin@cbg.org";mail.parameters.text = "The Electrical Permit has been rejected";mail.execute(bpm_package.children[0]);]]></activiti:string>
+        </activiti:field>
+        <modeler:editor-resource-id><![CDATA[emailrejection]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+    <userTask id="engineeringreview" name="Engineering Review" activiti:candidateGroups="GROUP_CBG_ENGINEERING" activiti:formKey="wf:activitiReviewTask">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[if (typeof bpm_workflowDueDate != 'undefined') task.dueDate = bpm_workflowDueDate
+                        if (typeof bpm_workflowPriority != 'undefined') task.priority = bpm_workflowPriority;]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('wf_reviewOutcome', task.getVariable('wf_reviewOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[deputiesreview]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[exclusivegateway2]]></modeler:editor-resource-id>
+      </extensionElements>
+    </exclusiveGateway>
+    <userTask id="managersreview" name="Manager Review&#xa;" activiti:candidateGroups="GROUP_CBG_MANAGERS" activiti:formKey="wf:activitiReviewTask">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[if (typeof bpm_workflowDueDate != 'undefined') task.dueDate = bpm_workflowDueDate
+                        if (typeof bpm_workflowPriority != 'undefined') task.priority = bpm_workflowPriority;]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('wf_reviewOutcome', task.getVariable('wf_reviewOutcome'));]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[commissionersreview]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <inclusiveGateway id="inclusivegateway1" name="Exclusive Gateway">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[inclusivegateway1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </inclusiveGateway>
+    <serviceTask id="intakepublish" name="Publish" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
+      <extensionElements>
+        <activiti:field name="script">
+          <activiti:string><![CDATA[for each (doc in bpm_package.children)
+		{
+			// remove lock just in case
+
+			var permitstatus = doc.properties["cbgecms:permit_status"];
+			if (permitstatus.indexOf("Approved") < 0) {
+				if (doc.isLocked) {
+					doc.unlock();
+				}
+				doc.properties["cbgecms:permit_status"] ="Approved"; 
+				doc.save();
+			}
+		}]]></activiti:string>
+        </activiti:field>
+        <modeler:editor-resource-id><![CDATA[intakepublish]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="sid-6608E76C-1C40-463A-A72E-F4B554028635" name="Email Approval" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
+      <extensionElements>
+        <activiti:field name="script">
+          <activiti:string><![CDATA[var mail = actions.create("mail");mail.parameters.to = "yasser.muwakki@armedia.com";mail.parameters.subject = "Electrical Permit Application Approved";mail.parameters.from = "admin@cbg.org";mail.parameters.text = "The Electrical Permit has been approved";mail.execute(bpm_package.children[0]);]]></activiti:string>
+        </activiti:field>
+        <modeler:editor-resource-id><![CDATA[sid-6608E76C-1C40-463A-A72E-F4B554028635]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="sid-22FFABF3-640E-4D1D-966E-72E808E84CC7">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-22FFABF3-640E-4D1D-966E-72E808E84CC7]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <sequenceFlow id="flow1" sourceRef="alfrescoStartevent1" targetRef="intakereview">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Electrial Permit Application Review');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flow1]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="flow27" sourceRef="emailrejection" targetRef="endevent1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[flow27]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="flowintakerejected" name="Rejected" sourceRef="exclusivegateway1" targetRef="emailrejection">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[flowintakerejected]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowintakeapproved" name="Approved" sourceRef="exclusivegateway1" targetRef="engineeringreview">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Engineering Review');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flowintakeapproved]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Approve'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="intakereview" targetRef="exclusivegateway1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[flow2]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="flow11" sourceRef="engineeringreview" targetRef="exclusivegateway2">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[flow11]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="flowengineeringrejected" name="Rejected" sourceRef="exclusivegateway2" targetRef="intakereview">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Rework');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flowdeputiesrejected]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowengineeringapproved" name="Approved" sourceRef="exclusivegateway2" targetRef="managersreview">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Manager Review');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flowdeputyapproved]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Approve'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="managersreview" targetRef="inclusivegateway1">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[flow13]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="flowmanagersrejected" name="Rejected" sourceRef="inclusivegateway1" targetRef="engineeringreview">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Rework');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flowcommissionersrejected]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowmanagersapproved" name="Approved" sourceRef="inclusivegateway1" targetRef="intakepublish">
+      <extensionElements>
+        <activiti:executionListener event="take" class="org.alfresco.repo.workflow.activiti.listener.ScriptExecutionListener">
+          <activiti:field name="script">
+            <activiti:string><![CDATA[execution.setVariable('bpm_workflowDescription', 'Publish');]]></activiti:string>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:editor-resource-id><![CDATA[flowcommissionersapproved]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${wf_reviewOutcome == 'Approve'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-163F5D7E-AA7F-4E12-AAA1-312C08E6D623" sourceRef="intakepublish" targetRef="sid-6608E76C-1C40-463A-A72E-F4B554028635">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-163F5D7E-AA7F-4E12-AAA1-312C08E6D623]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-5D145E20-C2B9-4191-8004-671111720377" sourceRef="sid-6608E76C-1C40-463A-A72E-F4B554028635" targetRef="sid-22FFABF3-640E-4D1D-966E-72E808E84CC7">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-5D145E20-C2B9-4191-8004-671111720377]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="prc" id="BPMNShape_prc">
+        <omgdc:Bounds height="920.0" width="1061.0" x="0.0" y="0.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="osa" id="BPMNShape_osa">
+        <omgdc:Bounds height="230.0" width="1031.0" x="30.0" y="0.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="intakereview" id="BPMNShape_intakereview">
+        <omgdc:Bounds height="55.0" width="105.0" x="135.0" y="90.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoStartevent1" id="BPMNShape_alfrescoStartevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="70.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="287.5" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="615.0" y="101.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="emailrejection" id="BPMNShape_emailrejection">
+        <omgdc:Bounds height="55.0" width="105.0" x="450.0" y="87.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ogcoac" id="BPMNShape_ogcoac">
+        <omgdc:Bounds height="230.0" width="1031.0" x="30.0" y="230.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="engineeringreview" id="BPMNShape_engineeringreview">
+        <omgdc:Bounds height="55.0" width="105.0" x="255.0" y="315.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="480.0" y="322.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="row" id="BPMNShape_row">
+        <omgdc:Bounds height="460.0" width="1031.0" x="30.0" y="460.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="managersreview" id="BPMNShape_managersreview">
+        <omgdc:Bounds height="55.0" width="105.0" x="855.0" y="697.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="inclusivegateway1" id="BPMNShape_inclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="705.0" y="705.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="intakepublish" id="BPMNShape_intakepublish">
+        <omgdc:Bounds height="55.0" width="105.0" x="660.0" y="495.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-6608E76C-1C40-463A-A72E-F4B554028635" id="BPMNShape_sid-6608E76C-1C40-463A-A72E-F4B554028635">
+        <omgdc:Bounds height="55.0" width="105.0" x="510.0" y="495.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-22FFABF3-640E-4D1D-966E-72E808E84CC7" id="BPMNShape_sid-22FFABF3-640E-4D1D-966E-72E808E84CC7">
+        <omgdc:Bounds height="28.0" width="28.0" x="427.5" y="508.5"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="855.0" y="725.0"/>
+        <omgdi:waypoint x="745.0" y="725.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="555.0" y="115.0"/>
+        <omgdi:waypoint x="615.0" y="115.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowintakerejected" id="BPMNEdge_flowintakerejected">
+        <omgdi:waypoint x="327.5" y="115.0"/>
+        <omgdi:waypoint x="450.0" y="115.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowengineeringrejected" id="BPMNEdge_flowengineeringrejected">
+        <omgdi:waypoint x="500.0" y="362.5"/>
+        <omgdi:waypoint x="500.0" y="434.0"/>
+        <omgdi:waypoint x="187.0" y="434.0"/>
+        <omgdi:waypoint x="187.4565560821485" y="145.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-5D145E20-C2B9-4191-8004-671111720377" id="BPMNEdge_sid-5D145E20-C2B9-4191-8004-671111720377">
+        <omgdi:waypoint x="510.0" y="522.5"/>
+        <omgdi:waypoint x="455.5" y="522.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowengineeringapproved" id="BPMNEdge_flowengineeringapproved">
+        <omgdi:waypoint x="519.9754601226994" y="342.47546012269936"/>
+        <omgdi:waypoint x="907.0" y="342.0"/>
+        <omgdi:waypoint x="907.4640992167102" y="697.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="99.99554035964574" y="115.36574488682062"/>
+        <omgdi:waypoint x="135.0" y="116.21951219512195"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="240.0" y="116.40625"/>
+        <omgdi:waypoint x="287.90816326530614" y="115.40816326530611"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowmanagersrejected" id="BPMNEdge_flowmanagersrejected">
+        <omgdi:waypoint x="705.0" y="725.0"/>
+        <omgdi:waypoint x="307.0" y="725.0"/>
+        <omgdi:waypoint x="307.4640522875817" y="370.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowintakeapproved" id="BPMNEdge_flowintakeapproved">
+        <omgdi:waypoint x="307.5" y="135.0"/>
+        <omgdi:waypoint x="307.5" y="315.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-163F5D7E-AA7F-4E12-AAA1-312C08E6D623" id="BPMNEdge_sid-163F5D7E-AA7F-4E12-AAA1-312C08E6D623">
+        <omgdi:waypoint x="660.0" y="522.5"/>
+        <omgdi:waypoint x="615.0" y="522.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="360.0" y="342.5"/>
+        <omgdi:waypoint x="480.0" y="342.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flowmanagersapproved" id="BPMNEdge_flowmanagersapproved">
+        <omgdi:waypoint x="725.0" y="705.0"/>
+        <omgdi:waypoint x="725.0" y="550.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

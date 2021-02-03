@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef" xmlns:modeler="http://activiti.com/modeler" modeler:version="1.0en" modeler:exportDateTime="20181010140652156" modeler:modelId="3009" modeler:modelVersion="1" modeler:modelLastUpdated="1539194611819" modeler:originalModelId="3008" modeler:originalModelVersion="5">
+  <collaboration id="Collaboration">
+    <participant id="sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7" name="Create-Approve-Disseminate Monthly Updates" processRef="Process_sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7"/>
+  </collaboration>
+  <process id="Process_sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7" name="Create-Approve-Disseminate Monthly Updates" isExecutable="true">
+    <laneSet id="laneSet_Process_sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7">
+      <lane id="sid-4F5354AA-1CB6-4B1D-BEA3-342537EDBD5D" name="User">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[sid-4F5354AA-1CB6-4B1D-BEA3-342537EDBD5D]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>sid-11E9081C-A894-4189-A2B9-78801B27AB58</flowNodeRef>
+        <flowNodeRef>sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4</flowNodeRef>
+        <flowNodeRef>sid-CA809A7E-8A4E-4270-80F5-F0803389933D</flowNodeRef>
+        <flowNodeRef>sid-0838DC01-F5BD-4592-B06F-938356BBA9BD</flowNodeRef>
+      </lane>
+      <lane id="sid-993C3CD5-A1F4-4A5E-86C4-6F53511C81EE" name="Approval Authority">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[sid-993C3CD5-A1F4-4A5E-86C4-6F53511C81EE]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B</flowNodeRef>
+        <flowNodeRef>sid-939C7776-9B17-41DA-9369-8183881CE60B</flowNodeRef>
+        <flowNodeRef>sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF</flowNodeRef>
+        <flowNodeRef>sid-C0AD813A-D146-42D2-BB4F-D1869786754D</flowNodeRef>
+        <flowNodeRef>sid-CFA231C8-BC4B-4603-A4BE-75435AF67838</flowNodeRef>
+        <flowNodeRef>sid-0EEE9849-78F5-4C68-9A05-4D973412B63E</flowNodeRef>
+        <flowNodeRef>sid-CAD9D6E7-5563-4CF5-8D53-8E34BC2430E7</flowNodeRef>
+        <flowNodeRef>sid-DDF45ECF-A4DB-4776-9CBC-0CE83615187B</flowNodeRef>
+        <flowNodeRef>sid-BE50ED7C-34F8-42F8-ABCE-81DFC3239C6D</flowNodeRef>
+      </lane>
+      <lane id="sid-9B8830D0-FCD0-440B-80C6-69774C912CBC" name="External Service-Agency">
+        <extensionElements>
+          <modeler:editor-resource-id xmlns:modeler="http://activiti.com/modeler"><![CDATA[sid-9B8830D0-FCD0-440B-80C6-69774C912CBC]]></modeler:editor-resource-id>
+        </extensionElements>
+        <flowNodeRef>sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5</flowNodeRef>
+        <flowNodeRef>sid-CE749715-8D22-4B85-A85F-31EE89FA3CB7</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="sid-11E9081C-A894-4189-A2B9-78801B27AB58">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-11E9081C-A894-4189-A2B9-78801B27AB58]]></modeler:editor-resource-id>
+      </extensionElements>
+    </startEvent>
+    <userTask id="sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4" name="Author Monthly Summary Report" activiti:assignee="1005" activiti:formKey="3003">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:form-reference-id><![CDATA[3003]]></modeler:form-reference-id>
+        <modeler:form-reference-name><![CDATA[DEEA Authoring Form]]></modeler:form-reference-name>
+        <modeler:activiti-idm-assignee><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email><![CDATA[wes.cushion@example.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname><![CDATA[Wes]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname><![CDATA[Cushion]]></modeler:assignee-info-lastname>
+        <modeler:assignee-info-externalid><![CDATA[wes]]></modeler:assignee-info-externalid>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <userTask id="sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B" name="Review Monthly Summary Report Through Appropriate Approval Authorities" activiti:async="true" activiti:exclusive="false" activiti:assignee="1004" activiti:formKey="3010">
+      <extensionElements>
+        <activiti:executionListener event="start" class="com.activiti.runtime.activiti.ContentProcessorExecutionListener">
+          <activiti:field name="externalContentHandler">
+            <activiti:expression><![CDATA[${externalContentHandler}]]></activiti:expression>
+          </activiti:field>
+        </activiti:executionListener>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:form-reference-id><![CDATA[3010]]></modeler:form-reference-id>
+        <modeler:form-reference-name><![CDATA[DEEA Monthly Report Review Form]]></modeler:form-reference-name>
+        <modeler:activiti-idm-assignee><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email><![CDATA[james.kirkland@example.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname><![CDATA[James]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname><![CDATA[Kirkland]]></modeler:assignee-info-lastname>
+        <modeler:assignee-info-externalid><![CDATA[james]]></modeler:assignee-info-externalid>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B]]></modeler:editor-resource-id>
+        <modeler:ignore-listener-on-import><![CDATA[com.activiti.runtime.activiti.ContentProcessorExecutionListener]]></modeler:ignore-listener-on-import>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="sid-939C7776-9B17-41DA-9369-8183881CE60B">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-939C7776-9B17-41DA-9369-8183881CE60B]]></modeler:editor-resource-id>
+      </extensionElements>
+    </exclusiveGateway>
+    <serviceTask id="sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF" name="Archive Approved Record" activiti:async="true" activiti:delegateExpression="${activiti_publishAlfrescoDelegate}">
+      <extensionElements>
+        <activiti:field name="contentSource">
+          <activiti:string><![CDATA[field]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="metaDataMapping">
+          <activiti:string><![CDATA[[{"fileProperty":"cm:title","propertyType":"string","propertyValueType":"field","formField":{"id":"subject","name":"Subject:","type":"text"}},{"fileProperty":"cm:description","propertyType":"string","propertyValueType":"field","formField":{"id":"narrative","name":"Narrative:","type":"multi-line-text"}}]]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="documentType">
+          <activiti:string><![CDATA[cmis:document]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="documentAspects">
+          <activiti:string><![CDATA[[{"aspectName":"cm:titled"}]]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="account">
+          <activiti:string><![CDATA[alfresco-1-DEEA repository]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="site">
+          <activiti:string><![CDATA[deea]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="publishAsType">
+          <activiti:string><![CDATA[process_initiator]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="path">
+          <activiti:string><![CDATA[7e54a4f6-d251-4cd5-b0b2-1cbc097a31cc]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="contentContainer">
+          <activiti:string><![CDATA[supportingdocuments]]></activiti:string>
+        </activiti:field>
+        <modeler:publish-task-type><![CDATA[alfresco]]></modeler:publish-task-type>
+        <modeler:site_title><![CDATA[DEEA]]></modeler:site_title>
+        <modeler:path_title><![CDATA[documentLibrary > Published Content > Concept Papers]]></modeler:path_title>
+        <modeler:editor-resource-id><![CDATA[sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF]]></modeler:editor-resource-id>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="sid-C0AD813A-D146-42D2-BB4F-D1869786754D">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-C0AD813A-D146-42D2-BB4F-D1869786754D]]></modeler:editor-resource-id>
+      </extensionElements>
+    </endEvent>
+    <userTask id="sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5" name="Review Record" activiti:assignee="1005" activiti:formKey="3011">
+      <extensionElements>
+        <modeler:allow-send-email><![CDATA[true]]></modeler:allow-send-email>
+        <modeler:form-reference-id><![CDATA[3011]]></modeler:form-reference-id>
+        <modeler:form-reference-name><![CDATA[DEEA External Agency Review Form]]></modeler:form-reference-name>
+        <modeler:activiti-idm-assignee><![CDATA[true]]></modeler:activiti-idm-assignee>
+        <modeler:assignee-info-email><![CDATA[wes.cushion@example.com]]></modeler:assignee-info-email>
+        <modeler:assignee-info-firstname><![CDATA[Wes]]></modeler:assignee-info-firstname>
+        <modeler:assignee-info-lastname><![CDATA[Cushion]]></modeler:assignee-info-lastname>
+        <modeler:assignee-info-externalid><![CDATA[wes]]></modeler:assignee-info-externalid>
+        <modeler:initiator-can-complete><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:editor-resource-id><![CDATA[sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5]]></modeler:editor-resource-id>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sid-CA809A7E-8A4E-4270-80F5-F0803389933D" sourceRef="sid-11E9081C-A894-4189-A2B9-78801B27AB58" targetRef="sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-CA809A7E-8A4E-4270-80F5-F0803389933D]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-0838DC01-F5BD-4592-B06F-938356BBA9BD" sourceRef="sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4" targetRef="sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-0838DC01-F5BD-4592-B06F-938356BBA9BD]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-CFA231C8-BC4B-4603-A4BE-75435AF67838" sourceRef="sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B" targetRef="sid-939C7776-9B17-41DA-9369-8183881CE60B">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-CFA231C8-BC4B-4603-A4BE-75435AF67838]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-CE749715-8D22-4B85-A85F-31EE89FA3CB7" sourceRef="sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5" targetRef="sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-CE749715-8D22-4B85-A85F-31EE89FA3CB7]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-0EEE9849-78F5-4C68-9A05-4D973412B63E" sourceRef="sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF" targetRef="sid-C0AD813A-D146-42D2-BB4F-D1869786754D">
+      <extensionElements>
+        <modeler:editor-resource-id><![CDATA[sid-0EEE9849-78F5-4C68-9A05-4D973412B63E]]></modeler:editor-resource-id>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sid-CAD9D6E7-5563-4CF5-8D53-8E34BC2430E7" name="Reject" sourceRef="sid-939C7776-9B17-41DA-9369-8183881CE60B" targetRef="sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4">
+      <extensionElements>
+        <modeler:conditionDefinition modeler:index="0" modeler:leftFormFieldId="decision_LABEL" modeler:rightValue="REJECT" modeler:operator="=="/>
+        <modeler:editor-resource-id><![CDATA[sid-CAD9D6E7-5563-4CF5-8D53-8E34BC2430E7]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(activiti_flowConditionsBean.exists(execution, 'decision_LABEL') && decision_LABEL == 'REJECT')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-DDF45ECF-A4DB-4776-9CBC-0CE83615187B" name="Approve" sourceRef="sid-939C7776-9B17-41DA-9369-8183881CE60B" targetRef="sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF">
+      <extensionElements>
+        <modeler:conditionDefinition modeler:index="0" modeler:leftFormFieldId="decision_LABEL" modeler:rightValue="APPROVE" modeler:operator="=="/>
+        <modeler:editor-resource-id><![CDATA[sid-DDF45ECF-A4DB-4776-9CBC-0CE83615187B]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(activiti_flowConditionsBean.exists(execution, 'decision_LABEL') && decision_LABEL == 'APPROVE')}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-BE50ED7C-34F8-42F8-ABCE-81DFC3239C6D" name="Approve and Disseminate" sourceRef="sid-939C7776-9B17-41DA-9369-8183881CE60B" targetRef="sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5">
+      <extensionElements>
+        <modeler:conditionDefinition modeler:index="0" modeler:leftFormFieldId="decision_LABEL" modeler:rightValue="DISSEMINATE AND APPROVE" modeler:operator="=="/>
+        <modeler:editor-resource-id><![CDATA[sid-BE50ED7C-34F8-42F8-ABCE-81DFC3239C6D]]></modeler:editor-resource-id>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${(activiti_flowConditionsBean.exists(execution, 'decision_LABEL') && decision_LABEL == 'DISSEMINATE AND APPROVE')}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
+    <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
+      <bpmndi:BPMNShape bpmnElement="sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7" id="BPMNShape_sid-11282535-01C9-4F3A-AAE9-6409CF9A92E7">
+        <omgdc:Bounds height="750.0" width="600.0" x="0.0" y="111.48360179378366"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-4F5354AA-1CB6-4B1D-BEA3-342537EDBD5D" id="BPMNShape_sid-4F5354AA-1CB6-4B1D-BEA3-342537EDBD5D">
+        <omgdc:Bounds height="243.836767293564" width="570.0" x="30.0" y="111.48360179378366"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-11E9081C-A894-4189-A2B9-78801B27AB58" id="BPMNShape_sid-11E9081C-A894-4189-A2B9-78801B27AB58">
+        <omgdc:Bounds height="30.0" width="30.0" x="116.09327484441789" y="209.3307377016777"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4" id="BPMNShape_sid-9BFF28F3-5369-4AEB-A1E3-0627AF0F9DE4">
+        <omgdc:Bounds height="86.99999999999997" width="124.0" x="179.09327484441792" y="184.3307377016777"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-993C3CD5-A1F4-4A5E-86C4-6F53511C81EE" id="BPMNShape_sid-993C3CD5-A1F4-4A5E-86C4-6F53511C81EE">
+        <omgdc:Bounds height="256.163232706436" width="570.0" x="30.0" y="355.3203690873477"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B" id="BPMNShape_sid-34450D32-3F08-4219-9E40-7C56B2AB9D3B">
+        <omgdc:Bounds height="116.0" width="142.0" x="170.09327484441792" y="425.4019854405657"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-939C7776-9B17-41DA-9369-8183881CE60B" id="BPMNShape_sid-939C7776-9B17-41DA-9369-8183881CE60B">
+        <omgdc:Bounds height="40.0" width="40.0" x="365.7566375570832" y="460.3203690873477"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF" id="BPMNShape_sid-B0E40069-9E9B-4B67-8FA6-4D1EF57828EF">
+        <omgdc:Bounds height="80.16748387099994" width="100.2421935480001" x="482.79876157534983" y="440.23662715184764"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-C0AD813A-D146-42D2-BB4F-D1869786754D" id="BPMNShape_sid-C0AD813A-D146-42D2-BB4F-D1869786754D">
+        <omgdc:Bounds height="28.0" width="28.0" x="518.9198583493499" y="375.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-9B8830D0-FCD0-440B-80C6-69774C912CBC" id="BPMNShape_sid-9B8830D0-FCD0-440B-80C6-69774C912CBC">
+        <omgdc:Bounds height="249.99999999999997" width="570.0" x="30.0" y="611.4836017937837"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5" id="BPMNShape_sid-70C83C6A-96A5-4C2C-809A-CED87E442DB5">
+        <omgdc:Bounds height="80.0" width="100.0" x="335.7566375570832" y="696.4836017937837"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-CFA231C8-BC4B-4603-A4BE-75435AF67838" id="BPMNEdge_sid-CFA231C8-BC4B-4603-A4BE-75435AF67838">
+        <omgdi:waypoint x="312.0932748444179" y="481.8895447162819"/>
+        <omgdi:waypoint x="366.173791002527" y="480.7375225327915"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-CE749715-8D22-4B85-A85F-31EE89FA3CB7" id="BPMNEdge_sid-CE749715-8D22-4B85-A85F-31EE89FA3CB7">
+        <omgdi:waypoint x="435.7566375570832" y="730.0913181701997"/>
+        <omgdi:waypoint x="532.9198583493499" y="730.0913181701997"/>
+        <omgdi:waypoint x="532.9198583493499" y="520.4041110228476"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-CAD9D6E7-5563-4CF5-8D53-8E34BC2430E7" id="BPMNEdge_sid-CAD9D6E7-5563-4CF5-8D53-8E34BC2430E7">
+        <omgdi:waypoint x="385.79616486871737" y="460.35989639898185"/>
+        <omgdi:waypoint x="386.2566375570832" y="227.83073770167766"/>
+        <omgdi:waypoint x="303.0932748444179" y="227.83073770167766"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-BE50ED7C-34F8-42F8-ABCE-81DFC3239C6D" id="BPMNEdge_sid-BE50ED7C-34F8-42F8-ABCE-81DFC3239C6D">
+        <omgdi:waypoint x="386.21940648778207" y="499.8576001566488"/>
+        <omgdi:waypoint x="385.8348654656811" y="696.4836017937837"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-CA809A7E-8A4E-4270-80F5-F0803389933D" id="BPMNEdge_sid-CA809A7E-8A4E-4270-80F5-F0803389933D">
+        <omgdi:waypoint x="146.08568762967883" y="224.80776901757235"/>
+        <omgdi:waypoint x="179.09327484441792" y="225.85801042895042"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0838DC01-F5BD-4592-B06F-938356BBA9BD" id="BPMNEdge_sid-0838DC01-F5BD-4592-B06F-938356BBA9BD">
+        <omgdi:waypoint x="241.09327484441792" y="271.33073770167766"/>
+        <omgdi:waypoint x="241.09327484441792" y="425.4019854405657"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0EEE9849-78F5-4C68-9A05-4D973412B63E" id="BPMNEdge_sid-0EEE9849-78F5-4C68-9A05-4D973412B63E">
+        <omgdi:waypoint x="532.987739215859" y="440.23662715184764"/>
+        <omgdi:waypoint x="532.9384062388175" y="402.9999877134159"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-DDF45ECF-A4DB-4776-9CBC-0CE83615187B" id="BPMNEdge_sid-DDF45ECF-A4DB-4776-9CBC-0CE83615187B">
+        <omgdi:waypoint x="405.7566375570832" y="480.3203690873477"/>
+        <omgdi:waypoint x="482.79876157534983" y="480.3203690873476"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
